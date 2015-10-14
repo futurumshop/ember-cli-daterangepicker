@@ -18,15 +18,17 @@ export default Ember.Component.extend({
 
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
-  rangeText: Ember.computed('start', 'end', 'format', 'serverFormat', 'separator', function () {
+  rangeText:'',
+  observer: Ember.observer('start', 'end', 'format', 'serverFormat', 'separator', function () {
     let format = this.get('format');
     let serverFormat = this.get('serverFormat');
     let start = this.get('start');
     let end = this.get('end');
+    let result = '';
     if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
-      return moment(start, serverFormat).format(format) + this.get('separator') + moment(end, serverFormat).format(format);
+      result = moment(start, serverFormat).format(format) + this.get('separator') + moment(end, serverFormat).format(format);
     }
-    return '';
+    this.set('rangeText', result);
   }),
   opens: null,
   drops: null,
