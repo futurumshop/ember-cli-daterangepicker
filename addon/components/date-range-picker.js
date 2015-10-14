@@ -100,7 +100,7 @@ export default Ember.Component.extend({
         if (typeof applyAction === 'function') {
           applyAction(start, end);
         } else {
-          self.sendAction(applyAction, picker.startDate, picker.endDate, start, end)
+          self.sendAction('applyAction', picker.startDate, picker.endDate, start, end)
         }
       } else {
         self.setProperties({start, end});
