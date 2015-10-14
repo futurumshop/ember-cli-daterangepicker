@@ -95,11 +95,11 @@ export default Ember.Component.extend({
       var applyAction = self.get('applyAction');
 
       if (applyAction) {
-        Ember.assert(
-          'applyAction for date-range-picker must be a function',
-          typeof applyAction === 'function'
-        );
-        applyAction(start, end);
+        if (typeof applyAction === 'function') {
+          applyAction(start, end);
+        } else {
+          self.sendAction(applyAction, picker.startDate, picker.endDate, start, end)
+        }
       } else {
         self.setProperties({start, end});
       }
