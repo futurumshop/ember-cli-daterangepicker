@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
       result = moment(start, serverFormat).format(format) + this.get('separator') + moment(end, serverFormat).format(format);
     }
-    this.set('rangeText', result);
+    return result;
   }),
   opens: null,
   drops: null,
